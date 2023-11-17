@@ -45,7 +45,7 @@ C-Eval由上海交通大学，清华大学，爱丁堡大学共同完成，是�
 HELM不专注于特定的任务和评估指标，而是提供了对LLMs的全面评估。它评估语言模型在各个方面，如语言理解、生成、连贯性、上下文敏感性、常识推理和领域特定知识。HELM的目标是全面评估语言模型在不同任务和领域的性能。量化评价指标：
 准确性，校准性，鲁棒性，公平性，偏差，毒性，效率。
 ## 指令跟随
-现有的这些评价基准，都偏向泛用性评价，评估的是整体的、通用性的能力，但这些能力，往往并不能直接转换为生产能力，并且不适合在生产链路中集成。比如 Chatbot Athena ，是通过让人来比较大语言模型的结果优劣，并对他们进行排序，进而评估出最优模型。但如果我们在生产中需要的并不是排序类的诉求，而是需要有一个准确回答的需求，那么 Chatbot Athena 并无法满足。因此， LLM 在工业生产中真正被需要评估的特性是指令跟随。下面是一个指令微调评价数据集例子。
+现有的这些评价基准，都偏向泛用性评价，评估的是整体的、通用性的能力，但这些能力，往往并不能直接转换为生产能力，并且不适合在生产链路中集成。比如 Chatbot Athena ，是通过让人来比较大语言模型的结果优劣，并对他们进行排序，进而评估出最优模型。但如果我们在生产中需要的并不是排序类的诉求，而是需要有一个准确回答的需求，那么 Chatbot Athena 并无法满足。特别是我们还需要根据客户的需要定制大模型。因此， LLM 在工业生产中真正被需要评估的特性是指令跟随。下面是一个指令微调评价数据集例子。
 ```python
 {"input": [{"role": "user", "content": "请解释下面词语的意思,请使用英文回答。\n---\n伟光正"}], "ideal": ["From the idiomatic phrase 'the great, glorious and correct Chinese Communist Party', it can also refer to a person associated with the Chinese Communist Party."]}
 {"input": [{"role": "user", "content": "请解释下面词语的意思,请使用英文回答。\n---\n赵家人"}], "ideal": ["From Lu Xun's famous middle-grade novel 'A Q Zhengzhuan', it generally refers to the powerful and noble class of the Chinese Communist Party. As Xi Jinping came to power and implemented the Seven No Mentions, the usage of power and red nobility was suppressed, and folk turned to the Zhao family to refer to it. Derivations include calling the People's Republic of China 'Zhao' and Xi Jinping, the current General Secretary of the CPC Central Committee, 'King Zhao', or replacing the word 'people' with the word 'Zhao family' in the names of various Chinese organs and media propaganda"]}
@@ -63,6 +63,55 @@ HELM不专注于特定的任务和评估指标，而是提供了对LLMs的全面
 {"input": [{"role": "user", "content": "请解释下面词语的意思,请使用英文回答。\n---\n蓝厂"}], "ideal": ["The term refers to the Chinese communications technology company Vivo, named after its blue logo."]}
 {"input": [{"role": "user", "content": "请解释下面词语的意思,请使用英文回答。\n---\n最强法务部"}], "ideal": ["The term refers to the companies and their legal departments are considered by enthusiasts to be those who are keen to initiate copyright lawsuits, etc. and often win"]}
 ```
+
+## 评价数据集链接
+| Benchmark   | Focus                              | Domain                   | Evaluation Criteria                           |
+|-------------|------------------------------------|--------------------------|-----------------------------------------------|
+| SOCKET [[paper](https://arxiv.org/abs/2305.14938)]      | Social knowledge                        | Specific downstream task | Social language understanding           |
+| MME [[paper](https://arxiv.org/abs/2306.13394)]      | Multimodal LLMs                        | Multi-modal task | Ability of perception and cognition           |
+| Xiezhi [[paper](https://arxiv.org/abs/2306.05783)][[GitHub](https://github.com/MikeGu721/XiezhiBenchmark)]      | Comprehensive domain knowledge   | General language task | Overall performance across multiple benchmarks   |
+| Choice-75 [[paper](https://arxiv.org/abs/2309.11737)][[GitHub](https://github.com/JoeyHou/branching)]  | Script learning | Specific downstream task | Overall performance of LLMs |
+| CUAD [[paper](https://arxiv.org/abs/2103.06268)] | Legal contract review | Specific downstream task | Legal contract understanding |
+| TRUSTGPT [[paper](https://arxiv.org/abs/2306.11507)] | Ethic | Specific downstream task | Toxicity, bias, and value-alignment |
+| MMLU [[paper](https://arxiv.org/abs/2009.03300)]      | Text models                        | General language task | Multitask accuracy           |
+| MATH [[paper](https://arxiv.org/abs/2103.03874)] | Mathematical problem  | Specific downstream task | Mathematical ability |
+| APPS [[paper](https://arxiv.org/abs/2105.09938)]|Coding challenge competence | Specific downstream task | Code generation ability|
+| CELLO[[paper](https://arxiv.org/abs/2309.09150)][[GitHub](https://github.com/Abbey4799/CELLO)] |Complex instructions | Specific downstream task | Count limit, answer format, task-prescribed phrases and input-dependent query|
+| C-Eval [[paper](https://arxiv.org/abs/2305.08322)][[GitHub](https://github.com/SJTU-LIT/ceval)]      | Chinese evaluation                 | General language task | 52 Exams in a Chinese context   |
+| EmotionBench [[paper](https://arxiv.org/abs/2308.03656)]      | Empathy ability                 | Specific downstream task | Emotional changes   |
+| OpenLLM [[Link](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)] | Chatbots          | General language task | Leaderboard rankings   |
+| DynaBench [[paper](https://arxiv.org/abs/2104.14337)]   | Dynamic evaluation                 | General language task    | NLI, QA, sentiment, and hate speech               |
+| Chatbot Arena [[Link](https://lmsys.org/blog/2023-05-03-arena/)]  | Chat assistants      | General language task    | Crowdsourcing and Elo rating system              |
+| AlpacaEval [[GitHub](https://github.com/tatsu-lab/alpaca_eval)]  | Automated evaluation               | General language task    | Metrics, robustness, and diversity       |
+| CMMLU [[paper](https://arxiv.org/abs/2306.09212)][[GitHub](https://github.com/haonan-li/CMMLU)] | Chinese multi-tasking               | Specific downstream task    | Multi-task language understanding capabilities|
+| HELM [[paper](https://arxiv.org/abs/2211.09110)][[Link](https://crfm.stanford.edu/helm/latest/)]        | Holistic evaluation           | General language task    | Multi-metric                         |
+| API-Bank [[paper](https://arxiv.org/abs/2304.08244)]    | Tool-augmented                     | Specific downstream task | API call, response, and planning                                       |
+| M3KE [[paper](https://arxiv.org/abs/2305.10263)]    | Multi-task  | Specific downstream task | Multi-task accuracy                                       |
+| MMBench [[paper](https://arxiv.org/abs/2307.06281)][[GitHub](https://github.com/open-compass/MMBench)]    | Large vision-language models(LVLMs) |  Multi-modal task | Multifaceted capabilities of VLMs        |
+| SEED-Bench [[paper](https://arxiv.org/abs/2307.16125)][[GitHub](https://github.com/AILab-CVC/SEED-Bench)]    | Multi-modal Large Language Models |  Multi-modal task | Generative understanding of MLLMs |
+| ARB [[paper](https://arxiv.org/abs/2307.13692)]  | Advanced reasoning ability       | Specific downstream task | Multidomain advanced reasoning ability|
+| BIG-bench [[paper](https://arxiv.org/abs/2206.04615)][[GitHub](https://github.com/google/BIG-bench)]    | Capabilities and limitations of LMs | General language task | Model performance and calibration         |
+| MultiMedQA [[paper](https://arxiv.org/abs/2212.13138)]  | Medical QA       | Specific downstream task | Accuracy and human evaluation|
+| CVALUES [[paper](https://arxiv.org/abs/2307.09705)] [[GitHub](https://github.com/X-PLUG/CValues)]     | Safety and responsibility | Specific downstream task | Alignment ability of LLMs|
+| LVLM-eHub [[paper](https://arxiv.org/abs/2306.09265)]   |  LVLMs |  Multi-modal task |  Multimodal capabilities of LVLMs |
+| ToolBench [[GitHub](https://github.com/sambanova/toolbench)]  | Software tools               | Specific downstream task | Execution success rate                  |
+| FRESHQA [[paper](https://arxiv.org/abs/2310.03214)] [[GitHub](https://github.com/freshllms/freshqa)]     | Dynamic QA| Specific downstream task |Correctness and hallucination|
+| CMB [[paper](https://arxiv.org/abs/2308.08833)] [[Link](https://cmedbenchmark.llmzoo.com/)]     | Chinese comprehensive medicine| Specific downstream task |Expert evaluation and automatic evaluation|
+| PandaLM [[paper](https://arxiv.org/abs/2306.05087)] [[GitHub](https://github.com/WeOpenML/PandaLM)] | Instruction tuning               | General language task    | Winrate judged by PandaLM             |
+| MINT [[paper](https://arxiv.org/abs/2309.10691)] [[GitHub](https://xingyaoww.github.io/mint-bench/)]  | Multi-turn interaction, tools and language feedback   | Specific downstream task | Success rate with _k_-turn budget _SR<sub>k</sub>_|
+| Dialogue CoT [[paper](https://arxiv.org/abs/2305.11792)] [[GitHub](https://github.com/ruleGreen/Cue-CoT)]  | In-depth dialogue  | Specific downstream task | Helpfulness and acceptness of LLMs|
+| BOSS [[paper](https://arxiv.org/abs/2306.04618)] [[GitHub](https://github.com/lifan-yuan/OOD_NLP)] | OOD robustness in NLP               | General language task    | OOD robustness            |
+| MM-Vet [[paper](https://arxiv.org/abs/2308.02490)] [[GitHub](https://github.com/yuweihao/MM-Vet)]  | Complicated multi-modal tasks  |  Multi-modal task | Integrated vision-language capabilities|
+| LAMM [[paper](https://arxiv.org/abs/2306.06687)] [[GitHub](https://github.com/OpenLAMM/LAMM)]  | Multi-modal point clouds  |  Multi-modal task | Task-specific metrics|
+| GLUE-X [[paper](https://arxiv.org/abs/2211.08073)] [[GitHub](https://github.com/YangLinyi/GLUE-X)]     | OOD robustness for NLU tasks     | General language task    | OOD robustness                       |
+| KoLA [[paper](https://arxiv.org/abs/2306.09296)]       | Knowledge-oriented evaluation      | General language task    | Self-contrast metrics |
+| AGIEval [[paper](https://arxiv.org/abs/2304.06364)]     | Human-centered foundational models | General language task    | General                            |
+| PromptBench [[paper](https://arxiv.org/abs/2306.04528)] [[GitHub](https://github.com/microsoft/promptbench)] | Adversarial prompt resilience      | General language task    | Adversarial robustness           |
+| MT-Bench [[paper](https://arxiv.org/abs/2306.05685)]  | Multi-turn conversation      | General language task    | Winrate judged by GPT-4                |
+| M3Exam [[paper](https://arxiv.org/abs/2306.05179)] [[GitHub](https://github.com/DAMO-NLP-SG/M3Exam)]     | Multilingual, multimodal and multilevel | Specific downstream task | Task-specific metrics                         |
+| GAOKAO-Bench [[paper](https://arxiv.org/abs/2305.12474)]     | Chinese Gaokao examination | Specific downstream task | Accuracy and scoring rate                         |
+| SafetyBench [[paper](https://arxiv.org/abs/2309.07045)] [[GitHub](https://github.com/thu-coai/SafetyBench)]      | Safety | Specific downstream task | Safety abilities of LLMs                        |
+| LLMEval² [[paper](https://arxiv.org/abs/2308.01862)] [[Link](https://drive.google.com/file/d/1sRbYZ0SWqmbIlzC_eB2zjyQF5TBynSXo/view)] | LLM Evaluator | General language task | Accuracy, Macro-F1 and Kappa Correlation Coefficient                        |
 
 
 
