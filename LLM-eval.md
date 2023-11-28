@@ -113,5 +113,6 @@ HELM不专注于特定的任务和评估指标，而是提供了对LLMs的全面
 | SafetyBench [[paper](https://arxiv.org/abs/2309.07045)] [[GitHub](https://github.com/thu-coai/SafetyBench)]      | Safety | Specific downstream task | Safety abilities of LLMs                        |
 | LLMEval² [[paper](https://arxiv.org/abs/2308.01862)] [[Link](https://drive.google.com/file/d/1sRbYZ0SWqmbIlzC_eB2zjyQF5TBynSXo/view)] | LLM Evaluator | General language task | Accuracy, Macro-F1 and Kappa Correlation Coefficient                        |
 
+![图片](https://github.com/wtjgh/LLM-notes/assets/34306488/ed787a35-fd2e-4480-ba22-24912f0b377c)
 
 
