@@ -1,4 +1,4 @@
-# opencompass-notes
+     # opencompass-notes
 ![图片](https://github.com/wtjgh/LLM-notes/assets/34306488/80588b4e-4e0d-4c4e-93f0-554ff02fc181)  
  
 其中run.py文件是整个评估过程的启动文件，同样也是包含以下几个阶段：**配置** -> **推理** -> **评估** -> **可视化**。  
@@ -251,3 +251,32 @@ infer = dict(
 - `OpenICLInferTask`：基于 OpenICL 框架执行语言模型（LM）推断任务。
 - `OpenICLEvalTask`：基于 OpenEval 框架执行语言模型（LM）评估任务。
 
+## 结果对比
+下面两个表格为qwen_7b_chat在siqa数据集上以accuracy为评估指标的评估结果，区别只有构造prompt方式不同
+```text
+dataset    version    metric    mode    hf_qwen_7b_chat
+---------  ---------  --------  ------  ---------------
+siqa       ced5f6     accuracy  ppl         44.17
+```
+```text
+dataset    version    metric    mode    hf_qwen_7b_chat
+---------  ---------  --------  ------  ---------------
+siqa       e8d8c5     accuracy  ppl         67.2
+```
+区别如下：
+```text
+"label: 1": {
+            "testing input": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nA. make a new plan\nB. Go home and see Riley\nC. Find somewhere to go\nAnswer: A",
+            "prompt": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nA. make a new plan\nB. Go home and see Riley\nC. Find somewhere to go\nAnswer: A",
+            "PPL": 3.5157798911040685,
+            "BPB": 0.9755829017199771
+        }
+```
+```text
+"label: 1": {
+            "testing input": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nAnswer:\nmake a new plan",
+            "prompt": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nAnswer:\nmake a new plan",
+            "PPL": 3.948653302873884,
+            "BPB": 1.0087800408801892
+        }
+```
