@@ -1,4 +1,4 @@
-     # opencompass-notes
+# opencompass-notes
 ![图片](https://github.com/wtjgh/LLM-notes/assets/34306488/80588b4e-4e0d-4c4e-93f0-554ff02fc181)  
  
 其中run.py文件是整个评估过程的启动文件，同样也是包含以下几个阶段：**配置** -> **推理** -> **评估** -> **可视化**。  
