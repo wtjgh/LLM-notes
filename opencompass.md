@@ -266,16 +266,16 @@ siqa       e8d8c5     accuracy  ppl         67.2
 区别如下：
 ```text
 "label: 1": {
-            "testing input": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nA. make a new plan\nB. Go home and see Riley\nC. Find somewhere to go\nAnswer: A",
-            "prompt": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nA. make a new plan\nB. Go home and see Riley\nC. Find somewhere to go\nAnswer: A",
+            "testing input": "Tracy didn't go home that evening and resisted Riley's attacks. Question: What does Tracy need to do before this? A. make a new plan B. Go home and see Riley  C. Find somewhere to go Answer: A",
+            "prompt": "Tracy didn't go home that evening and resisted Riley's attacks. Question: What does Tracy need to do before this? A. make a new plan B. Go home and see Riley C. Find somewhere to go Answer: A",
             "PPL": 3.5157798911040685,
             "BPB": 0.9755829017199771
         }
 ```
 ```text
 "label: 1": {
-            "testing input": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nAnswer:\nmake a new plan",
-            "prompt": "Tracy didn't go home that evening and resisted Riley's attacks.\nQuestion: What does Tracy need to do before this?\nAnswer:\nmake a new plan",
+            "testing input": "Tracy didn't go home that evening and resisted Riley's attacks. Question: What does Tracy need to do before this? Answer: make a new plan",
+            "prompt": "Tracy didn't go home that evening and resisted Riley's attacks. Question: What does Tracy need to do before this? Answer: make a new plan",
             "PPL": 3.948653302873884,
             "BPB": 1.0087800408801892
         }
