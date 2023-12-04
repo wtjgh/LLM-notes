@@ -280,3 +280,15 @@ siqa       e8d8c5     accuracy  ppl         67.2
             "BPB": 1.0087800408801892
         }
 ```
+
+## finetune
+```text
+dataset    version    metric    mode    hf_qwen_7b_chat
+---------  ---------  --------  ------  ---------------
+siqa       ced5f6     accuracy  ppl         43.65
+```
+```text
+dataset    version    metric    mode    hf_qwen_7b_chat
+---------  ---------  --------  ------  ---------------
+siqa       e8d8c5     accuracy  ppl         56.76
+```
