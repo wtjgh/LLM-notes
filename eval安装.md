@@ -53,3 +53,12 @@
    ```
 
    你可以在 `configs/models` 下找到所有 Llama / Llama-2 / Llama-2-chat 模型的配置文件示例。
+   
+# 数据集准备
+在 Eval 项目根目录下运行下面命令，将数据集准备至 `${Eval}/data` 目录下：
+
+```bash
+cp /ssd/tjwu/test_opencompass/test/data .
+```
+数据集我暂时放在204节点服务器上，对应路径如上。后续会上传git.
+
