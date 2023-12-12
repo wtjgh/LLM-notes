@@ -61,4 +61,4 @@
 cp /ssd/tjwu/test_opencompass/test/data .
 ```
 数据集我暂时放在204节点服务器上，对应路径如上。后续会上传git.
-接下来，你可以阅读快速使用了解 Eval 的基本用法。
+接下来，你可以阅读 `${Eval}/docs`评估使用手册了解 Eval 的基本用法。
