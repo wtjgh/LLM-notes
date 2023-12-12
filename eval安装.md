@@ -14,6 +14,7 @@
    git clone https://github.com/fanlinfuture/Fanlin-LLM-One.git
    cd Fanlin-LLM-One/Eval
    pip install requirements.txt
+   apt-get update && apt-get install libgl1
    pip install -e .
    ```
 
