@@ -44,3 +44,11 @@ metric = hf_metrics.JiebaRougeEvaluator
 print(metric.compute("如果你需要使用官方实现评测","如果你想要使用官方实现评测"))
 {'rouge1': 92.30769184615382, 'rouge2': 0.0, 'rougeL': 92.30769184615382}
  ```
+## SacreBLEU
+BLEU是一种用于评估机器翻译结果质量的指标。它主要侧重于衡量机器翻译输出与参考翻译之间的相似程度，着重于句子的准确性和精确匹配。BLEU通过计算N-gram（连续N个词）的匹配程度，来评估机器翻译的精确率（Precision）。
+ ```python
+from eval.openicl.icl_evaluator import hf_metrics
+metric = hf_metrics.Sacrebleu
+print(metric.compute(["hello there general kenobi", "foo bar foobar"], [["hello there general kenobi", "hello there !"],["foo bar foobar", "foo bar foobar"]]))
+{'score': 100.00000000000004, 'counts': [7, 5, 3, 1], 'totals': [7, 5, 3, 1], 'precisions': [100.0, 100.0, 100.0, 100.0], 'bp': 1.0, 'sys_len': 7, 'ref_len': 7}
+ ```
