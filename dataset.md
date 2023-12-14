@@ -8,7 +8,7 @@ from eval.datasets.siqa import siqaDataset
 data = siqaDataset
 dataset = data.load("./data/siqa")
 print(dataset)
----------------------------------------------------------
+------------------------------------------------------------------------------------------
 DatasetDict({
     train: Dataset({
         features: ['context', 'question', 'answerA', 'answerB', 'answerC', 'label'],
@@ -40,3 +40,7 @@ print(dataset['abst'][0])
 孩子得到大三阳的可能性较高，需要定期检查肝功和乙肝病毒DNA，及时应用保肝的药物和抗病毒的药物。此外，营养摄入要均衡，保证足够的睡眠。
  ```
 对于huatuo数据集，'content'表示送入大模型的问题，'abst'为对应输入的标签。
+## 内部使用
+内部使用时，只需要到 ```Fanlin-LLM-One/Eval/configs/datasets ```路径下，找到对应dataset的配置文件修改数据集路径即可，以siqa数据集为例。其数据集配置文件位于
+```Fanlin-LLM-One/Eval/configs/datasets/siqa/siqa_ppl_e8d8c5.py ```。对应修改代码如下：
+
