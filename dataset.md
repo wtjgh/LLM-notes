@@ -21,4 +21,4 @@ DatasetDict({
 })
  ```
 如上所示，使用 ```load() ```函数传递数据集的路径，即可成功加载数据集。DatasetDict中为加载出来的数据集内容。可以看到，train，validation是siqa数据集的一种划分
-方式。以train子集为例，
+方式。以train子集为例，features表示siqa数据集的内容。其中'context', 'question', 'answerA', 'answerB', 'answerC'为模型的输入，'label'为对应输入的标签。
