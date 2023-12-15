@@ -107,7 +107,7 @@ def htgen_postprocess(text: str) -> str:
 2. 在定义好数据集加载、评测以及数据后处理等方法之后，需要在配置文件中(Eval/configs/datasets/HT_generate/ht_gen.py)新增以下配置：
 
 ```python
-  from eval.openicl.icl_prompt_template import PromptTemplate
+from eval.openicl.icl_prompt_template import PromptTemplate
 from eval.openicl.icl_retriever import ZeroRetriever
 from eval.openicl.icl_inferencer import GenInferencer
 from eval.openicl.icl_evaluator import JiebaRougeEvaluator
