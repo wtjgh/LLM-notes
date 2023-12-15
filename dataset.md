@@ -48,7 +48,7 @@ siqa_datasets = [
     dict(
         abbr="siqa",
         type=siqaDataset,
-        path='./data/siqa',
+        path='./data/siqa',  #将该路径替换为自己目录下的路径
         reader_cfg=siqa_reader_cfg,
         infer_cfg=siqa_infer_cfg,
         eval_cfg=siqa_eval_cfg)
