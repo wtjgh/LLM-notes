@@ -43,4 +43,14 @@ print(dataset['abst'][0])
 ## 内部使用
 内部使用时，只需要到 ```Fanlin-LLM-One/Eval/configs/datasets ```路径下，找到对应dataset的配置文件修改数据集路径即可，以siqa数据集为例。其数据集配置文件位于
 ```Fanlin-LLM-One/Eval/configs/datasets/siqa/siqa_ppl_e8d8c5.py ```。对应修改代码如下：
-
+ ```python
+siqa_datasets = [
+    dict(
+        abbr="siqa",
+        type=siqaDataset,
+        path='./data/siqa',
+        reader_cfg=siqa_reader_cfg,
+        infer_cfg=siqa_infer_cfg,
+        eval_cfg=siqa_eval_cfg)
+]
+ ```
