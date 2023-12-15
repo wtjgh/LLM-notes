@@ -54,3 +54,92 @@ siqa_datasets = [
         eval_cfg=siqa_eval_cfg)
 ]
  ```
+## 新增数据集
+尽管 Eval 已经包含了大多数常用数据集，用户在支持新数据集的时候需要完成以下几个步骤：
+
+1. 在 `eval/datasets` 文件夹新增数据集脚本 `mydataset.py`, 该脚本需要包含：
+
+   - 数据集及其加载方式，需要定义一个 `MyDataset` 类，实现数据集加载方法 `load`，该方法为静态方法，需要返回 `datasets.Dataset` 类型的数据。这里我们使用 huggingface dataset 作为数据集的统一接口，避免引入额外的逻辑。以huatuo数据集为例，具体示例如下：
+  ```python
+ import os.path as osp
+import json
+from datasets import Dataset
+from eval.registry import LOAD_DATASET, TEXT_POSTPROCESSORS
+from .base import BaseDataset
+
+@LOAD_DATASET.register_module()
+class HTGenDataset(BaseDataset):
+
+    @staticmethod
+    def load(path: str):
+        src_path = osp.join(path, 'dev.json')
+        with open(src_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+
+        result_dict = {'content': [], 'abst': []}
+
+        for item in data:
+            conversations = item.get('conversations', [])
+            # result_dict = {'content': [], 'target': []}
+            
+            for conversation in conversations:
+                if conversation['from'] == 'user':
+                    result_dict['content'].append(conversation['value'])
+                elif conversation['from'] == 'assistant':
+                    result_dict['abst'].append(conversation['value'])
+
+        dataset = Dataset.from_dict({
+            'content': result_dict['content'],
+            'abst': result_dict['abst']
+        })
+        return dataset
+   ```
+- （可选）如果 Eval已有的后处理方法不能满足需要，需要用户定义 `mydataset_postprocess` 方法，根据输入的字符串得到相应后处理的结果。具体示例如下：
+
+   ```python
+  @TEXT_POSTPROCESSORS.register_module('htgen')
+def htgen_postprocess(text: str) -> str:
+    text = text.strip().split('\n')[0]
+    text = text.replace('1. ', '') if text.startswith('1. ') else text
+    text = text.replace('- ', '') if text.startswith('- ') else text
+    text = text.strip('“，！”')
+    return text
+   ```
+2. 在定义好数据集加载、评测以及数据后处理等方法之后，需要在配置文件中(Eval/configs/datasets/HT_generate/ht_gen.py)新增以下配置：
+
+   ```python
+  from eval.openicl.icl_prompt_template import PromptTemplate
+from eval.openicl.icl_retriever import ZeroRetriever
+from eval.openicl.icl_inferencer import GenInferencer
+from eval.openicl.icl_evaluator import JiebaRougeEvaluator
+from eval.datasets import HTGenDataset,htgen_postprocess
+
+htgen_reader_cfg = dict(input_columns=['content'], output_column='abst')
+
+htgen_infer_cfg = dict(
+    prompt_template=dict(
+        type=PromptTemplate,
+        template=dict(round=[
+            dict(role='HUMAN', prompt='{content}\n：'),
+        ])),
+    retriever=dict(type=ZeroRetriever),
+    inferencer=dict(type=GenInferencer))
+
+htgen_eval_cfg = dict(
+    evaluator=dict(type=JiebaRougeEvaluator),
+    pred_role='BOT',
+    pred_postprocessor=dict(type=htgen_postprocess),
+   
+)
+
+htgen_datasets = [
+    dict(
+        type=HTGenDataset,
+        abbr='htgen',
+        path='/ssd/tjwu/huatuo26m-lite/',
+        reader_cfg=htgen_reader_cfg,
+        infer_cfg=htgen_infer_cfg,
+        eval_cfg=htgen_eval_cfg)
+]
+
+   ```
