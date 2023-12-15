@@ -96,7 +96,7 @@ class HTGenDataset(BaseDataset):
    ```
 - （可选）如果 Eval已有的后处理方法不能满足需要，需要用户定义 `mydataset_postprocess` 方法，根据输入的字符串得到相应后处理的结果。具体示例如下：
 ```python
- @TEXT_POSTPROCESSORS.register_module('htgen')
+@TEXT_POSTPROCESSORS.register_module('htgen')
 def htgen_postprocess(text: str) -> str:
     text = text.strip().split('\n')[0]
     text = text.replace('1. ', '') if text.startswith('1. ') else text
@@ -106,7 +106,7 @@ def htgen_postprocess(text: str) -> str:
 ```
 2. 在定义好数据集加载、评测以及数据后处理等方法之后，需要在配置文件中(Eval/configs/datasets/HT_generate/ht_gen.py)新增以下配置：
 
-   ```python
+```python
   from eval.openicl.icl_prompt_template import PromptTemplate
 from eval.openicl.icl_retriever import ZeroRetriever
 from eval.openicl.icl_inferencer import GenInferencer
@@ -141,4 +141,4 @@ htgen_datasets = [
         eval_cfg=htgen_eval_cfg)
 ]
 
-   ```
+ ```
