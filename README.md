@@ -77,4 +77,7 @@ def save_pretrained(
         **kwargs,
     ):
 ```
-这里我们只需要关注三个参数。
+ 这里我们只需要关注三个参数。
+ - `save_directory`：模型保存的路径。
+ - `max_shard_size`：模型保存单个权重文件最大大小，超过就会切分为多个权重文件，并同时会生成一个索引json文件。默认为5GB。
+ - `safe_serialization`模型保存的格式，默认为True会保存为safetensor格式，False会保存为pytorch的bin格式。
