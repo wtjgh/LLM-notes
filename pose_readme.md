@@ -8,6 +8,7 @@ mmpose对mmcv有依赖，所以在安装mmpose之前最好先安装mmcv。mmpose
 2. 安装 mmpose：
 
    ```bash
+   git clone git@github.com:fanlinfuture/video_human.git
    cd mmpose
    pip install -r requirements.txt
    pip install -v -e .
