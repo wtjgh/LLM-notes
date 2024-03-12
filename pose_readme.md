@@ -9,10 +9,11 @@ mmpose对mmcv有依赖，所以在安装mmpose之前最好先安装mmcv。mmpose
 
    ```bash
    git clone git@github.com:fanlinfuture/video_human.git
-   cd mmpose
+   cd video_human/mmpose
    pip install -r requirements.txt
    pip install -v -e .
    # "-v" means verbose, or more output
    # "-e" means installing a project in editable mode,
    # thus any local modifications made to the code will take effect without reinstallation.
    ```
+# 使用
