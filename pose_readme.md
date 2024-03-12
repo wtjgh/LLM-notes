@@ -19,8 +19,7 @@ mmpose对mmcv有依赖，所以在安装mmpose之前最好先安装mmcv。mmpose
 # 使用
 程序的主入口在run.py,使用如下的命令即可运行程序拼接视频。
  ```bash
-   pip install mmcv==2.1.0
-   ```bash
+   
    python run.py --det_checkpoint checkpoint/rtmdet_m_8xb32-100e_coco-obj365-person-235e8209.pth \
    --pose_checkpoint checkpoint/td-hm_hrnet-w32_8xb64-210e_ubody-coco-256x192-7c227391_20230807.pth \
    --input  /ssd/tjwu/Person_Skeleton_Estimation/full_data/ \
