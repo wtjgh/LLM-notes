@@ -34,5 +34,6 @@ mmpose对mmcv有依赖，所以在安装mmpose之前最好先安装mmcv。mmpose
 - `output-root`：检测到的姿态数据与处理后的视频的输出路径。
 - `rife`：插帧模型权重路径。
 - `target_time`：想生成视频的长度，以秒为单位。
+
 当然，还有一个参数min_loop_time，表示剪切视频loop最少持续时间。默认为10秒。如非必要，不建议修改。
    
