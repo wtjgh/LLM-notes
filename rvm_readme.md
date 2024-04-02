@@ -1,6 +1,6 @@
 # 安装
 1. 安装 RVM 推理所需环境
-由于我们只需要用RVM进行推理，所以我们只需要安装推理所需的依赖包：
+ 由于我们只需要用RVM进行推理，所以我们只需要安装推理所需的依赖包：
    ```bash
    git clone
    cd RobustVideoMatting
