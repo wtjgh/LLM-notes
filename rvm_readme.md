@@ -3,8 +3,8 @@
  
  由于我们只需要用RVM进行推理，所以我们只需要安装推理所需的依赖包：
    ```bash
-   git clone
-   cd RobustVideoMatting
+   git clone http://10.128.218.101:1234/wutianjian/robustvideomatting.git
+   cd robustvideomatting
    pip install -r requirements_inference.txt
    ```
 
