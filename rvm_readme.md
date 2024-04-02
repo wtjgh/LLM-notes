@@ -27,7 +27,11 @@
 
 或者使用提供的视频转换 API：
    ```python
+import torch
+from model import MattingNetwork
 from run import convert_video
+model = MattingNetwork(variant='mobilenetv3').eval().cuda() # 或 variant="resnet50"
+model.load_state_dict(torch.load('rvm_mobilenetv3.pth'))
 
 convert_video(
     model,                           # 模型，可以加载到任何设备（cpu 或 cuda）
